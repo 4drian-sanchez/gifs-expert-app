@@ -1,7 +1,7 @@
 import type { Gif, GifsResponse } from "../interfaces"
 
 
-export async function getGifBySearch(search : string) : Promise<Gif[]| string> {
+export async function getGifBySearch(search : string) : Promise<Gif[]> {
     try {
         const URL =  `https://api.giphy.com/v1/gifs/search?api_key=${import.meta.env.VITE_API_KEY}&q=${search}&limit=10&lang=es`
         const request = await fetch(URL)
@@ -16,7 +16,6 @@ export async function getGifBySearch(search : string) : Promise<Gif[]| string> {
         }) )
 
     } catch (error) {
-        if( error instanceof Error) return error.message
         return []
     }
 }

@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { CustomHeader } from '../components';
-import { mockGifs } from '../data/mocks';
 import { GifsSearch } from './components/GifsSearch';
 import { PreviosResearches } from './components/PreviousResearch';
 import GifsList from './components/GifsList';
 import { getGifBySearch } from '../action/get-gif-by-search.action';
+import type { Gif } from '../interfaces';
 
 export default function App() {
 
   const [previousGifs, setPreviousGifs] = useState<string[]>([])
+  const [gifs, setGifs] = useState<Gif[]>([])
 
   const onLabelClicked = (label: string) => {
     console.log(label)
@@ -24,7 +25,8 @@ export default function App() {
     //* Agregamos el search a previousGifs y limitamos el número de elementos a 8
     setPreviousGifs( [ searchFormatter, ...previousGifs.splice(0, 8) ] )
     const actionRepsonse = await getGifBySearch(search)
-    console.log(actionRepsonse)
+    
+      setGifs(actionRepsonse)
   }
 
   return (
@@ -36,7 +38,7 @@ export default function App() {
 
       <PreviosResearches previousGifs={previousGifs} onLabelClicked={onLabelClicked} />
 
-      < GifsList gifs={mockGifs} />
+      < GifsList gifs={gifs} />
 
     </>
   )
