@@ -4,7 +4,7 @@ import { PreviosResearches } from './components/PreviousResearch';
 import GifsList from './components/GifsList';
 import { useGifs } from './hook/useGifs';
 
-export default function App() {
+export default function GifsExpertApp() {
 
   const { gifs, handleSearch, previousGifs, onLabelClicked } = useGifs()
 
